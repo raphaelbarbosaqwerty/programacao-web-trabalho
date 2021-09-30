@@ -6,3 +6,8 @@ function goToContact() {
 function routeToPost(id) {
     location.href = "post/" + id;
 }
+
+
+function getPosts() {
+    fetch('localhost/');
+}
