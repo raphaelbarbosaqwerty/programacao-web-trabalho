@@ -6,7 +6,8 @@
   Luan Pereira
 Raphael Barbosa
  -->
-<?php 
+<?php
+    require_once 'session.php';
     require '../../vendor/autoload.php';
 	use App\Controllers\NewsController;
     ini_set('default_charset','UTF-8');

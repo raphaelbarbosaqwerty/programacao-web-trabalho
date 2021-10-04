@@ -1,3 +1,7 @@
+<?php
+    require '../../vendor/autoload.php';
+	use App\Controllers\UserController;
+?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Jornal dos Amiguinhos</a>
@@ -16,16 +20,22 @@
                 <li class="nav-item">
                     <a class="nav-link" href="contact.php">Contato</a>
                 </li>
-                <? if(!$_SESSION) { ?>
+                <? if($_SESSION != null) {
+                    if(isset($_POST['Logout'])) {
+                        $controller = new UserController(); 
+                        $controller->logout();
+                        header('location:login.php');
+                    }  
+                ?>
+                <form method="POST">
+                    <input type="submit" name="Logout" value="Logout" class="btn btn-primary mb-3" />
+                </form>
                 <li class="nav-item">
-                    <a class="nav-link active" href="login.php">Login</a>
+                    <a class="nav-link" href="posts.php">Postar</a>
                 </li>
                 <?} else { ?>
                 <li class="nav-item">
-                    <a class="nav-link active" href="login.php">Logout</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="posts.php">Postar</a>
+                    <a class="nav-link active" href="login.php">Login</a>
                 </li>
                 <?} ?>
             </ul>

@@ -4,13 +4,18 @@
   Uéslei Bervanger
   Laura Caroline
   Luan Pereira
-Raphael Barbosa
+  Raphael Barbosa
  -->
 
-<?php 
+<?php
+    require_once 'session.php';
     require '../../vendor/autoload.php';
-	use App\Controllers\NewsController;
-    ini_set('default_charset','UTF-8');
+	use App\Controllers\UserController;
+
+    if($_POST) {
+        $controller = new UserController();
+        $responseLogin = $controller->login($_POST['inputEmail'], $_POST['inputPassword']);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -38,17 +43,22 @@ Raphael Barbosa
                 </div>
             </div>
             <br>
-            <form method="POST" action="<?NewsController::get(1)?>" id="formlogin" name="formlogin">
+            <form method="POST">
                 <div class="mb-3">
-                    <label for="inputPassword" class="col-sm-2 col-form-label">Email</label>
-                    <input type="text" class="form-control" id="inputPassword">
+                    <label for="inputEmail" class="col-sm-2 col-form-label" require>Email</label>
+                    <input type="email" class="form-control" id="inputEmail" name="inputEmail">
                 </div>
                 <div class="mb-3">
-                    <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-                    <input type="password" class="form-control" id="inputPassword">
+                    <label for="inputPassword" class="col-sm-2 col-form-label" require>Password</label>
+                    <input type="password" class="form-control" id="inputPassword" name="inputPassword">
                 </div>
+                <? if(isset($responseLogin) && !$responseLogin) {?>
+                <div class="alert alert-danger" role="alert">
+                    Email ou Senha incorretos!
+                </div>
+                <?}?>
                 <div class="mb-3 row">
-                    <input type="button" class="btn btn-primary mb-3" value="Acessar">
+                    <input type="submit" class="btn btn-primary mb-3" value="Acessar">
                 </div>
             </form>
         </div>
