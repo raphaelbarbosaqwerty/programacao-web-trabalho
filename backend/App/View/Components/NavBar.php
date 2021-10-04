@@ -33,6 +33,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="posts.php">Postar</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="messages.php">Mensagens de contato</a>
+                </li>
                 <?} else { ?>
                 <li class="nav-item">
                     <a class="nav-link active" href="login.php">Login</a>

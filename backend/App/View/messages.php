@@ -38,33 +38,40 @@ Raphael Barbosa
         <? include_once 'Components/NavBar.php'; ?>
     </header>
 
-    <main>
+    <main id="main">
         <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
             <div class="row justify-content-center">
                 <div class="col-xl-7 col-lg-9 text-center">
                     <br>
-                    <h1>Nova postagem </h1>
+                    <h1>Notícias de hoje</h1>
                 </div>
             </div>
-            <br>
-            <form method="POST">
-                <div class="mb-3">
-                    <label class="col-sm-2 col-form-label">Título</label>
-                    <input type="text" class="form-control" id="title" name="title" value="">
+
+            <div style="margin-bottom : 1rem;"></div>
+            <div class="row">
+                <? 
+                    $response = NewsController::get();
+                    foreach ($response as $value) {
+                ?>
+                <div class="card col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" style="width: 15rem;">
+                    <img src="img/logo_unipampa.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <? echo $value['title'];?>
+                        </h5>
+                        <p class="card-text">
+                            <? echo $value['body'];?>
+                        </p>
+                        <input type="button" class="btn btn-primary" value="Saiba mais"
+                            onclick="routeToPost(<?php echo $value['id']; ?>)">
+                    </div>
                 </div>
-                <div class="mb-3 form-group">
-                    <label for="postText">Escreva o texto</label>
-                    <textarea class="form-control" id="body" name="body" rows="3" value=""></textarea>
-                </div>
-                <? if(isset($response) && $response) { ?>
-                <div class="alert alert-success" role="alert">
-                    Post inserido com sucesso!
-                </div>
-                <? } ?>
-                <div class="mb-3 row">
-                    <input type="submit" class="btn btn-primary mb-3" value="Postar">
-                </div>
-            </form>
+                <div style="width: 3rem;"></div>
+                <? 
+                    }
+                    
+                ?>
+            </div>
         </div>
     </main>
 
