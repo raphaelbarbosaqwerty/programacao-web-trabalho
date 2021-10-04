@@ -11,6 +11,11 @@ Raphael Barbosa
     require '../../vendor/autoload.php';
 	use App\Controllers\NewsController;
     ini_set('default_charset','UTF-8');
+
+    if($_POST && $_POST['delete']) {
+        $controller = new NewsController();
+        $controller->delete($_POST['id']);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -55,8 +60,20 @@ Raphael Barbosa
                         <p class="card-text">
                             <? echo $value['body'];?>
                         </p>
-                        <input type="button" class="btn btn-primary" value="Saiba mais"
-                            onclick="routeToPost(<?php echo $value['id']; ?>)">
+                        <input type="button" class="btn btn-primary mb-1" value="Saiba mais"
+                            onclick="routeToPost(<? echo $value['id']; ?>)">
+                        <form method="POST">
+                            <input type="text" class="form-control" id="id" name="id" value="<? echo $value['id'];?>"
+                                hidden>
+
+                            <input type="submit" class="btn btn-danger mb-1" value="Apagar" name="delete">
+                        </form>
+                        <form method="GET" action="posts.php?id=1">
+                            <input type="text" class="form-control" id="id" name="id" value="<? echo $value['id'];?>"
+                                hidden>
+
+                            <input type="submit" class="btn btn-secondary" value="Atualizar" name="update">
+                        </form>
                     </div>
                 </div>
                 <div style="width: 3rem;"></div>

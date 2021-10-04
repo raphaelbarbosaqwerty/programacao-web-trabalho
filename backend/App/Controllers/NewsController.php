@@ -13,14 +13,14 @@
         }
 
         public function post($post) {
-            return News::newPost($post);
+            return News::insert($post);
         }
 
         public function update() {
-            
+            return News::update($post);
         }
 
-        public function delete(int $id) {
-            
+        public function delete($id) {
+            return News::delete($id);
         }
     }
