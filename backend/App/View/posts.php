@@ -11,14 +11,17 @@ Raphael Barbosa
     require_once 'session.php';
 	require '../../vendor/autoload.php';
 	use App\Controllers\NewsController;
+    use App\Entities\NewsEntity;
 
     if($_SESSION == null) {
         header('location:login.php');
     }
-    
+
     if($_POST) {
+        $entity = new NewsEntity($_POST);
         $controller = new NewsController();
-        $response = $controller->post($_POST);
+        $response = $controller->post($entity);
+        header('location:index.php');
     }
 ?>
 <!DOCTYPE html>
@@ -50,11 +53,13 @@ Raphael Barbosa
             <form method="POST">
                 <div class="mb-3">
                     <label class="col-sm-2 col-form-label">Título</label>
-                    <input type="text" class="form-control" id="title" name="title" value="">
+                    <input type="text" class="form-control" id="title" name="title" value="<? echo $_GET['title']; ?>">
+                    <input type="text" class="form-control" id="id" name="id" value="<? echo $_GET['id']; ?>" hidden>
                 </div>
                 <div class="mb-3 form-group">
                     <label for="postText">Escreva o texto</label>
-                    <textarea class="form-control" id="body" name="body" rows="3" value=""></textarea>
+                    <input class="form-control" id="body" name="body" rows="3"
+                        value="<? echo $_GET['body']; ?>"></textarea>
                 </div>
                 <? if(isset($response) && $response) { ?>
                 <div class="alert alert-success" role="alert">

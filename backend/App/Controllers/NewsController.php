@@ -2,7 +2,8 @@
 
     namespace App\Controllers;
     use App\Models\News;
-
+    use App\Entities\NewsEntity;
+    
     class NewsController {
         public function get(int $id = null) {
             if($id) {
@@ -12,11 +13,15 @@
             }
         }
 
-        public function post($post) {
-            return News::insert($post);
+        public function post(NewsEntity $post) {
+            if($post->id != null) {
+                $this->update($post);
+            } else {
+                return News::insert($post);
+            }
         }
 
-        public function update() {
+        public function update(NewsEntity $post) {
             return News::update($post);
         }
 
