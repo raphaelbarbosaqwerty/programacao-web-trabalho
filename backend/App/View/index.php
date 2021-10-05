@@ -62,6 +62,7 @@ Raphael Barbosa
                         </p>
                         <input type="button" class="btn btn-primary mb-1" value="Saiba mais"
                             onclick="routeToPost(<? echo $value['id']; ?>)">
+                        <? if($_SESSION != null) { ?>
                         <form method="POST">
                             <input type="text" class="form-control" id="id" name="id" value="<? echo $value['id'];?>"
                                 hidden>
@@ -71,9 +72,14 @@ Raphael Barbosa
                         <form method="GET" action="posts.php?id=1">
                             <input type="text" class="form-control" id="id" name="id" value="<? echo $value['id'];?>"
                                 hidden>
+                            <input type="text" class="form-control" id="title" name="title"
+                                value="<? echo $value['title'];?>" hidden>
+                            <input type="text" class="form-control" id="body" name="body"
+                                value="<? echo $value['body'];?>" hidden>
 
                             <input type="submit" class="btn btn-secondary" value="Atualizar" name="update">
                         </form>
+                        <?} ?>
                     </div>
                 </div>
                 <div style="width: 3rem;"></div>

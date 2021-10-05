@@ -2,6 +2,7 @@
 
     namespace App\Models;
     use App\Models\Database;
+    use App\Entities\NewsEntity;
 
     class News {
         private static $table = 'news';
@@ -35,14 +36,14 @@
             }
         }
 
-        public static function insert($post) {
+        public static function insert(NewsEntity $post) {
             $database = Database::getInstance();
             $connection = $database->getDatabaseConnection();
             $query = 'INSERT INTO '.self::$table.' (title, image, body) VALUES (:title, :image, :body)';
             $response = $connection->prepare($query);
-            $response->bindValue(':title', $post['title']);
-            $response->bindValue(':image', $post['image']);
-            $response->bindValue(':body', $post['body']);
+            $response->bindValue(':title', $post->title);
+            $response->bindValue(':image', $post->image);
+            $response->bindValue(':body', $post->body);
             $response->execute();
             
             if($response->rowCount() > 0) {
@@ -52,17 +53,15 @@
             return false;
         }
 
-        public static function update($post) {
-            var_dump($post);
-            die();
+        public static function update(NewsEntity $post) {
             $database = Database::getInstance();
             $connection = $database->getDatabaseConnection();
             $query = 'UPDATE '.self::$table.' SET title = :title, image = :image, body = :body WHERE id = :id';
             $response = $connection->prepare($query);
-            $response->bindValue(':title', $post['title']);
-            $response->bindValue(':image', $post['image']);
-            $response->bindValue(':body', $post['body']);
-            $response->bindValue(':id', $post['id']);
+            $response->bindValue(':title', $post->title);
+            $response->bindValue(':image', $post->image);
+            $response->bindValue(':body', $post->body);
+            $response->bindValue(':id', $post->id);
             $response->execute();
             
             if($response->rowCount() > 0) {
