@@ -12,10 +12,8 @@
             }
         }
 
-        public function post() {
-            var_dump($_POST);
-            die();
-            return $_POST;
+        public function post($post) {
+            return News::newPost($post);
         }
 
         public function update() {

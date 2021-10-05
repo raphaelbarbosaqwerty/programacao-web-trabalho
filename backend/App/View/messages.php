@@ -6,13 +6,21 @@
   Luan Pereira
 Raphael Barbosa
  -->
+
 <?php
     require_once 'session.php';
-    require '../../vendor/autoload.php';
+	require '../../vendor/autoload.php';
 	use App\Controllers\NewsController;
-    ini_set('default_charset','UTF-8');
-?>
 
+    if($_SESSION == null) {
+        header('location:login.php');
+    }
+    
+    if($_POST) {
+        $controller = new NewsController();
+        $response = $controller->post($_POST);
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,7 +30,6 @@ Raphael Barbosa
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link href="css/style.css" rel="stylesheet">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 
 <body>
@@ -74,7 +81,7 @@ Raphael Barbosa
     </footer>
 
 
-    <script src="js/main.js"></script>
+    <script src="assets/js/main.js"></script>
 
 </body>
 

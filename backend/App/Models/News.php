@@ -34,4 +34,21 @@
                 throw new \Exception("Sem notícias encontradas");
             }
         }
+
+        public static function newPost($post) {
+            $database = Database::getInstance();
+            $connection = $database->getDatabaseConnection();
+            $query = 'INSERT INTO '.self::$table.' (title, image, body) VALUES (:title, :image, :body)';
+            $response = $connection->prepare($query);
+            $response->bindValue(':title', $post['title']);
+            $response->bindValue(':image', $post['image']);
+            $response->bindValue(':body', $post['body']);
+            $response->execute();
+            
+            if($response->rowCount() > 0) {
+                return true;
+            }
+            
+            return false;
+        }
     }

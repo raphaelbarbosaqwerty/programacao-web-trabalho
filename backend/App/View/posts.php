@@ -7,6 +7,20 @@
 Raphael Barbosa
  -->
 
+<?php
+    require_once 'session.php';
+	require '../../vendor/autoload.php';
+	use App\Controllers\NewsController;
+
+    if($_SESSION == null) {
+        header('location:login.php');
+    }
+    
+    if($_POST) {
+        $controller = new NewsController();
+        $response = $controller->post($_POST);
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,25 +47,22 @@ Raphael Barbosa
                 </div>
             </div>
             <br>
-            <form action="#">
-                <div class="mb-3">
-                    <label class="col-sm-2 col-form-label">Nome</label>
-                    <input type="text" class="form-control" id="inputPassword">
-                </div>
+            <form method="POST">
                 <div class="mb-3">
                     <label class="col-sm-2 col-form-label">Título</label>
-                    <input type="text" class="form-control" id="inputPassword">
-                </div>
-                <div class="form-group mb-3">
-                    <label for="uploadImagem">Imagem da postagem</label>
-                    <input type="file" class="form-control-file" id="uploadImagem">
+                    <input type="text" class="form-control" id="title" name="title" value="">
                 </div>
                 <div class="mb-3 form-group">
                     <label for="postText">Escreva o texto</label>
-                    <textarea class="form-control" id="postText" rows="3"></textarea>
+                    <textarea class="form-control" id="body" name="body" rows="3" value=""></textarea>
                 </div>
+                <? if(isset($response) && $response) { ?>
+                <div class="alert alert-success" role="alert">
+                    Post inserido com sucesso!
+                </div>
+                <? } ?>
                 <div class="mb-3 row">
-                    <input type="button" class="btn btn-primary mb-3" value="Acessar">
+                    <input type="submit" class="btn btn-primary mb-3" value="Postar">
                 </div>
             </form>
         </div>
