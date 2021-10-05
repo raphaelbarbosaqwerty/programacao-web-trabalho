@@ -5,7 +5,7 @@
     use App\Entities\ContactEntity;
 
     class Contact {
-        private static $table = 'contact';
+        private static $table = 'contacts';
 
         public static function getContact(int $id) {
             $database = Database::getInstance();
@@ -29,11 +29,7 @@
             $response = $connection->prepare($query);
             $response->execute();
 
-            if($response->rowCount() > 0 ) {
-                return $response->fetchAll(\PDO::FETCH_ASSOC);
-            } else {
-                throw new \Exception("Sem mensagens encontradas");
-            }
+            return $response->fetchAll(\PDO::FETCH_ASSOC);
         }
 
         public static function insert(ContactEntity $post) {

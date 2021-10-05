@@ -8,6 +8,15 @@ Raphael Barbosa
  -->
 <?php
     require_once 'session.php';
+    require '../../vendor/autoload.php';
+	use App\Controllers\ContactController;
+    use App\Entities\ContactEntity;
+
+    if($_POST) {
+        $entity = new ContactEntity($_POST);
+        $controller = new ContactController();
+        $response = $controller->post($entity);
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,22 +43,27 @@ Raphael Barbosa
                 </div>
             </div>
 
-            <form>
+            <form method="POST">
                 <div class="mb-3 form-group">
                     <label for="exampleInputEmail1">E-mail</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp"
                         placeholder="sample@sample.com">
                     <small id="emailHelp" class="form-text text-muted">Nós não compartilharemos essas
                         informações.</small>
                 </div>
                 <div class="mb-3 form-group">
                     <label for="exampleFormControlTextarea1">Deixe sua mensagem</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <textarea class="form-control" id="message" name="message" rows="3"></textarea>
                 </div>
                 <div class="mb-3 form-check">
                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
                     <label class="form-check-label" for="exampleCheck1">Notificar-me</label>
                 </div>
+                <? if(isset($response) && $response) { ?>
+                <div class="alert alert-success" role="alert">
+                    Email enviado com sucesso!
+                </div>
+                <? } ?>
                 <div class="mb-3 row">
                     <button type="submit" class="btn btn-primary">Submeter</button>
                 </div>

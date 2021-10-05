@@ -10,14 +10,14 @@ Raphael Barbosa
 <?php
     require_once 'session.php';
 	require '../../vendor/autoload.php';
-	use App\Controllers\NewsController;
+	use App\Controllers\ContactController;
 
     if($_SESSION == null) {
         header('location:login.php');
     }
     
     if($_POST) {
-        $controller = new NewsController();
+        $controller = new ContactController();
         $response = $controller->post($_POST);
     }
 ?>
@@ -49,28 +49,36 @@ Raphael Barbosa
 
             <div style="margin-bottom : 1rem;"></div>
             <div class="row">
-                <? 
-                    $response = NewsController::get();
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Mensagem</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <? 
+                    $response = ContactController::get();
                     foreach ($response as $value) {
-                ?>
-                <div class="card col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" style="width: 15rem;">
-                    <img src="img/logo_unipampa.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <? echo $value['title'];?>
-                        </h5>
-                        <p class="card-text">
-                            <? echo $value['body'];?>
-                        </p>
-                        <input type="button" class="btn btn-primary" value="Saiba mais"
-                            onclick="routeToPost(<?php echo $value['id']; ?>)">
-                    </div>
-                </div>
-                <div style="width: 3rem;"></div>
-                <? 
-                    }
-                    
-                ?>
+                    ?>
+                        <tr>
+                            <th scope="row">
+                                <? echo $value['id']?>
+                            </th>
+                            <td>
+                                <? echo $value['email']?>
+                            </td>
+                            <td>
+                                <? echo $value['message']?>
+                            </td>
+                        </tr>
+                        <? 
+                        }
+                    ?>
+                    </tbody>
+                </table>
             </div>
         </div>
     </main>
