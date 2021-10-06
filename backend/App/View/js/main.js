@@ -4,7 +4,7 @@ function goToContact() {
 }
 
 function routeToPost(id) {
-    location.href = "post/" + id;
+    location.href = "post.php/?id=" + id;
 }
 
 
