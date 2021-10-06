@@ -69,7 +69,7 @@ Raphael Barbosa
 
                             <input type="submit" class="btn btn-danger mb-1" value="Apagar" name="delete">
                         </form>
-                        <form method="GET" action="posts.php?id=1">
+                        <form method="GET" action="posts.php?id=<? echo $value['id']; ?>">
                             <input type="text" class="form-control" id="id" name="id" value="<? echo $value['id'];?>"
                                 hidden>
                             <input type="text" class="form-control" id="title" name="title"
