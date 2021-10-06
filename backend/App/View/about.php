@@ -57,9 +57,12 @@ Raphael Barbosa
                 para a
                 comunidade em geral.</p>
 
-            <div class="mb-3 row">
-                <input type="button" class="btn btn-primary" value="Contate-nos" onclick="goToContact()">
-            </div>
+            <form method="POST">
+                <div class="mb-3 row">
+                    <input type="submit" name="Contate-nos" value="Contate-nos" class="btn btn-primary" />
+                    <? if($_POST) {header('location:contact.php'); } ?>
+                </div>
+            </form>
         </div>
     </main>
 

@@ -7,18 +7,14 @@
     class ContactController {
         public function get(int $id = null) {
             if($id) {
-                return Contact::getNews($id);
+                return Contact::getContact($id);
             } else {
                 return Contact::getAll();
             }
         }
 
         public function post(ContactEntity $post) {
-            if($post->id != null) {
-                $this->update($post);
-            } else {
-                return Contact::insert($post);
-            }
+            return Contact::insert($post);
         }
 
         public function update(ContactEntity $post) {
